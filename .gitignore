@@ -1,2 +1,9 @@
 venv/
 *.pyc
+tmp/
+.vscode/
+*.txt
+*.pickle
+*__pycache__*
+credentials.json
+.DS_Store
