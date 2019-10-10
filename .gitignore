@@ -1,9 +1,10 @@
 venv/
 *.pyc
 tmp/
-.vscode/
+.vscode/*
 *.txt
 *.pickle
 *__pycache__*
-credentials.json
+*.json
 .DS_Store
+*.env
