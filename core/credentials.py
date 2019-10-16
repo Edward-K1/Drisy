@@ -4,7 +4,7 @@ from ast import literal_eval
 from google_auth_oauthlib.flow import InstalledAppFlow
 
 from .utils import decode_base64
-from .data import (alphabet, translated_alphabet, transposition_value,
+from .globals import (alphabet, translated_alphabet, transposition_value,
                    profile_path, user_credentials_path, app_credentials)
 
 

@@ -3,7 +3,7 @@ from google_auth_oauthlib.flow import InstalledAppFlow
 from google.oauth2.credentials import Credentials
 
 from .credentials import get_credentials, save_credentials
-from .data import drive_scopes, user_credentials_path
+from .globals import drive_scopes, user_credentials_path
 
 
 def get_auth_credentials():

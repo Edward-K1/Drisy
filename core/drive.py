@@ -3,8 +3,8 @@ from googleapiclient.discovery import build
 from .auth import get_auth_credentials
 
 
-class ListDrive:
-    """Lists the contents of a User's Google Drive
+class DriveManager:
+    """Manages the contents of a User's Google Drive
     """
     def __init__(self, page_size=100):
         self._credentials = get_auth_credentials()
