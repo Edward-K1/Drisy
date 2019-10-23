@@ -3,18 +3,16 @@ import sys
 
 import wx
 
-import systray
-
 from inspect import getsourcefile
-from assets.icon import DrisyIcon
-
+from .assets.icon import DrisyIcon
+from .systray import DrisyTray
 
 class MainFrame(wx.Frame):
     def __init__(self, parent, title='Drisy'):
         super(MainFrame, self).__init__(parent, title=title)
 
         self.SetIcon(DrisyIcon.GetIcon())
-        self.tbIcon = systray.DrisyTray(self)
+        self.tbIcon = DrisyTray(self)
         self.panel = wx.Panel(self)
         self.tbIcon.Bind(wx.EVT_MENU, self.ExitApp, id=wx.ID_EXIT)
 

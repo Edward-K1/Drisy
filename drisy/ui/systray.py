@@ -1,7 +1,7 @@
 import wx
 import wx.adv
 
-from assets.icon import DrisyIcon
+from .assets.icon import DrisyIcon
 
 
 class DrisyTray(wx.adv.TaskBarIcon):
