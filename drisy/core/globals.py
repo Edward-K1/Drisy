@@ -1,7 +1,9 @@
 import os
 
+from dotenv import load_dotenv
 from .utils import decode_base64
 
+load_dotenv()
 # use base64 strings to store special characters in .env variables
 alphabet = ('' or decode_base64(os.getenv('DRS_ALPHABET')))
 translated_alphabet = ('' or decode_base64(os.getenv('DRS_TRANS_ALPHABET')))
