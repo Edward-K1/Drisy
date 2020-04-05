@@ -15,6 +15,16 @@ class MainFrame(wx.Frame):
         self.tbIcon = DrisyTray(self)
         self.panel = wx.Panel(self)
         self.tbIcon.Bind(wx.EVT_MENU, self.ExitApp, id=wx.ID_EXIT)
+        self.SetBaseSizer()
+
+
+    def SetBaseSizer(self):
+        self.baseBox = wx.BoxSizer(wx.VERTICAL)
+        self.baseBoxPnl = wx.Panel(self.panel)
+        self.baseBoxPnl.SetBackgroundColour('#ffffff')
+        self.baseBox.Add(self.baseBoxPnl, wx.ID_ANY, wx.EXPAND | wx.ALL, 20)
+        self.panel.SetSizer(self.baseBox)
+
 
     def ExitApp(self, event):
         self.tbIcon.RemoveIcon()
