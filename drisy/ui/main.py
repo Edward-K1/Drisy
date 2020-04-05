@@ -16,6 +16,39 @@ class MainFrame(wx.Frame):
         self.panel = wx.Panel(self)
         self.tbIcon.Bind(wx.EVT_MENU, self.ExitApp, id=wx.ID_EXIT)
 
+        self.SetBaseSizer()
+        self.CreateMainMenu()
+
+
+    def CreateMainMenu(self):
+        self.menu = wx.MenuBar()
+
+        fileMenu = wx.Menu()
+        fileItem = fileMenu.Append(wx.ID_EXIT,"&Quit","Close Drisy")
+        self.menu.Append(fileMenu, "&File")
+
+        viewMenu = wx.Menu()
+        self.menu.Append(viewMenu,"&View")
+
+        toolsMenu = wx.Menu()
+        self.menu.Append(toolsMenu,"&Tools")
+
+        settingsMenu = wx.Menu()
+        self.menu.Append(settingsMenu, "&Settings")
+
+        aboutMenu = wx.Menu()
+        self.menu.Append(aboutMenu, "&About")
+
+        self.SetMenuBar(self.menu)
+
+    def SetBaseSizer(self):
+        self.baseBox = wx.BoxSizer(wx.VERTICAL)
+        self.baseBoxPnl = wx.Panel(self.panel)
+        self.baseBoxPnl.SetBackgroundColour('#ffffff')
+        self.baseBox.Add(self.baseBoxPnl, wx.ID_ANY, wx.EXPAND | wx.ALL, 20)
+        self.panel.SetSizer(self.baseBox)
+
+
     def ExitApp(self, event):
         self.tbIcon.RemoveIcon()
         self.tbIcon.Destroy()
