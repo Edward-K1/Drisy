@@ -15,8 +15,31 @@ class MainFrame(wx.Frame):
         self.tbIcon = DrisyTray(self)
         self.panel = wx.Panel(self)
         self.tbIcon.Bind(wx.EVT_MENU, self.ExitApp, id=wx.ID_EXIT)
-        self.SetBaseSizer()
 
+        self.SetBaseSizer()
+        self.CreateMainMenu()
+
+
+    def CreateMainMenu(self):
+        self.menu = wx.MenuBar()
+
+        fileMenu = wx.Menu()
+        fileItem = fileMenu.Append(wx.ID_EXIT,"&Quit","Close Drisy")
+        self.menu.Append(fileMenu, "&File")
+
+        viewMenu = wx.Menu()
+        self.menu.Append(viewMenu,"&View")
+
+        toolsMenu = wx.Menu()
+        self.menu.Append(toolsMenu,"&Tools")
+
+        settingsMenu = wx.Menu()
+        self.menu.Append(settingsMenu, "&Settings")
+
+        aboutMenu = wx.Menu()
+        self.menu.Append(aboutMenu, "&About")
+
+        self.SetMenuBar(self.menu)
 
     def SetBaseSizer(self):
         self.baseBox = wx.BoxSizer(wx.VERTICAL)

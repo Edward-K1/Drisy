@@ -13,6 +13,6 @@ class DrisyTray(wx.adv.TaskBarIcon):
         self.PopupMenu = self.CreatePopupMenu()
 
     def CreatePopupMenu(self):
-        self.menu = wx.Menu()
-        self.menu.Append(wx.ID_EXIT, "Exit")
-        return self.menu
+        menu = wx.Menu()
+        menu.Append(wx.ID_EXIT, "Exit")
+        return menu
