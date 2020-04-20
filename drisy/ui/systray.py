@@ -15,7 +15,7 @@ class DrisyTray(wx.adv.TaskBarIcon):
         self.PopupMenu = self.CreatePopupMenu()
 
     def CreatePopupMenu(self):
-        docsImg = rescale_image(slide.getImage(), 16, 16)
+        docsImg = rescale_image(doc.getImage(), 16, 16)
         sheetsImg = rescale_image(sheet.getImage(), 16, 16)
         slidesImg = rescale_image(slide.getImage(), 16, 16)
         menu = wx.Menu()
