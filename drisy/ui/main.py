@@ -6,6 +6,8 @@ import wx
 from inspect import getsourcefile
 from .assets.icon import DrisyIcon
 from .systray import DrisyTray
+from .topbar import topbar
+
 
 class MainFrame(wx.Frame):
     def __init__(self, parent, title='Drisy'):
@@ -17,21 +19,22 @@ class MainFrame(wx.Frame):
         self.tbIcon.Bind(wx.EVT_MENU, self.ExitApp, id=wx.ID_EXIT)
 
         self.SetBaseSizer()
+        self.CreateTopBar()
         self.CreateMainMenu()
-
+        self.Size = (800, 600)
 
     def CreateMainMenu(self):
         self.menu = wx.MenuBar()
 
         fileMenu = wx.Menu()
-        fileItem = fileMenu.Append(wx.ID_EXIT,"&Quit","Close Drisy")
+        fileItem = fileMenu.Append(wx.ID_EXIT, "&Quit", "Close Drisy")
         self.menu.Append(fileMenu, "&File")
 
         viewMenu = wx.Menu()
-        self.menu.Append(viewMenu,"&View")
+        self.menu.Append(viewMenu, "&View")
 
         toolsMenu = wx.Menu()
-        self.menu.Append(toolsMenu,"&Tools")
+        self.menu.Append(toolsMenu, "&Tools")
 
         settingsMenu = wx.Menu()
         self.menu.Append(settingsMenu, "&Settings")
@@ -41,13 +44,16 @@ class MainFrame(wx.Frame):
 
         self.SetMenuBar(self.menu)
 
+    def CreateTopBar(self):
+        tbar = topbar(self.panel)
+        self.baseBox.Add(tbar,
+                         proportion=1,
+                         flag=wx.ALL | wx.EXPAND,
+                         border=15)
+
     def SetBaseSizer(self):
         self.baseBox = wx.BoxSizer(wx.VERTICAL)
-        self.baseBoxPnl = wx.Panel(self.panel)
-        self.baseBoxPnl.SetBackgroundColour('#ffffff')
-        self.baseBox.Add(self.baseBoxPnl, wx.ID_ANY, wx.EXPAND | wx.ALL, 20)
         self.panel.SetSizer(self.baseBox)
-
 
     def ExitApp(self, event):
         self.tbIcon.RemoveIcon()
