@@ -92,3 +92,11 @@ class DrisyDb:
         }
 
         return OrderedDict(global_map)
+
+    def get_dict_entries(self):
+        query = "select f.*, usr.username from files f, owners usr where f.owner=usr.uem"
+        results = self.execute_query(query)
+        column_names = [c[0] for c in results.description]
+        dict_list = [dict(zip(column_names, row)) for row in results.fetchall()]
+        return dict_list
+        
