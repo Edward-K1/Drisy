@@ -20,7 +20,7 @@ supported_mimetypes = {
     'video/webm',
     'video/mp2t',
     'video/3gpp',
-    'video/3gpp2'
+    'video/3gpp2',
     'video/mp4',
     'video/quicktime',
     'video/x-flv',
@@ -85,8 +85,8 @@ supported_mimetypes = {
 
 'code':[
     'text/javascript',
-    'text/html'
-    'text/x-java-source'
+    'text/html',
+    'text/x-java-source',
     'application/x-httpd-php',
     'application/x-sh',
     'text/x-asm',
