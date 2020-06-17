@@ -2,11 +2,13 @@ import os
 import sys
 
 import wx
+import concurrent.futures
+import threading
 
-from inspect import getsourcefile
-from .assets.icon import DrisyIcon
+from .assets.icon import DrisyIcon, doc, sheet, slide, unknown, image, archive, folder, audio, video, pdf, executable, code
 from .systray import DrisyTray
-from .topbar import topbar
+from .utils import rescale_image
+from .displayentries import CreateMainItemList
 
 
 class MainFrame(wx.Frame):
@@ -45,11 +47,23 @@ class MainFrame(wx.Frame):
         self.SetMenuBar(self.menu)
 
     def CreateTopBar(self):
-        tbar = topbar(self.panel)
-        self.baseBox.Add(tbar,
-                         proportion=1,
-                         flag=wx.ALL | wx.EXPAND,
-                         border=15)
+        self.toolbar = self.CreateToolBar(style=wx.TB_HORZ_TEXT)
+        self.toolbar.AddSeparator()
+        docTool = self.toolbar.AddTool(
+            wx.ID_ANY, 'New Document',
+            wx.Bitmap(rescale_image(doc.Image, 32, 32)), "New Google Document")
+        self.toolbar.AddSeparator()
+        sheetTool = self.toolbar.AddTool(
+            wx.ID_ANY, 'New Spreadsheet',
+            wx.Bitmap(rescale_image(sheet.Image, 32, 32)), "New Google Sheet")
+        self.toolbar.AddSeparator()
+        slideTool = self.toolbar.AddTool(
+            wx.ID_ANY, 'New Presentation',
+            wx.Bitmap(rescale_image(slide.Image, 32, 32)),
+            "New Google Presentation")
+        self.toolbar.AddSeparator()
+
+        self.toolbar.Realize()
 
     def SetBaseSizer(self):
         self.baseBox = wx.BoxSizer(wx.VERTICAL)
@@ -63,15 +77,9 @@ class MainFrame(wx.Frame):
 
 class DrisyApp(wx.App):
     def OnInit(self):
-        self.frame = MainFrame(None, title='Drisy 1.0')
+        self.frame = MainFrame(None, title='Drisy 0.1')
         self.frame.Show()
         return True
-
-
-def get_base_dir():
-    file_path = os.path.abspath(getsourcefile(lambda: 0))
-    base_dir = os.path.dirname(file_path)
-    return base_dir
 
 
 if __name__ == '__main__':
