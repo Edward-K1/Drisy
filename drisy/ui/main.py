@@ -5,10 +5,11 @@ import wx
 import concurrent.futures
 import threading
 
-from .assets.icon import DrisyIcon, doc, sheet, slide, unknown, image, archive, folder, audio, video, pdf, executable, code
+from .assets.icon import (DrisyIcon, doc, sheet, slide, unknown, image,
+                          archive, folder, audio, video, pdf, executable, code)
 from .systray import DrisyTray
 from .utils import rescale_image
-from .displayentries import CreateMainItemList
+from .displayentries import CreateItemList
 
 
 class MainFrame(wx.Frame):
@@ -23,6 +24,10 @@ class MainFrame(wx.Frame):
         self.SetBaseSizer()
         self.CreateTopBar()
         self.CreateMainMenu()
+
+        with concurrent.futures.ThreadPoolExecutor(max_workers=1) as executor:
+            executor.map(CreateItemList(self))  # not proper usage of threading
+
         self.Size = (800, 600)
 
     def CreateMainMenu(self):
@@ -33,15 +38,13 @@ class MainFrame(wx.Frame):
         self.menu.Append(fileMenu, "&File")
 
         viewMenu = wx.Menu()
-        self.menu.Append(viewMenu, "&View")
-
         toolsMenu = wx.Menu()
-        self.menu.Append(toolsMenu, "&Tools")
-
         settingsMenu = wx.Menu()
-        self.menu.Append(settingsMenu, "&Settings")
-
         aboutMenu = wx.Menu()
+
+        self.menu.Append(viewMenu, "&View")
+        self.menu.Append(toolsMenu, "&Tools")
+        self.menu.Append(settingsMenu, "&Settings")
         self.menu.Append(aboutMenu, "&About")
 
         self.SetMenuBar(self.menu)
