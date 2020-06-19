@@ -10,3 +10,4 @@ tmp/
 *.env
 htmlcov/*
 .coverage
+*.env.config
