@@ -9,16 +9,17 @@ class Config:
                    '9AQUJDREVGR0hJSktMTU5PUFFSU1RVVldYWVpbXF1eX2BhY',
                    'mNkZWZnaGlqa2xtbm9wcXJzdHV2d3h5ent8fX4=')
 
-        alphabet_length = len(
-            base64.b64decode(''.join(alphb64)).decode('utf-8'))
+        self.alphabet_text = base64.b64decode(''.join(alphb64)).decode('utf-8')
+        alphabet_length = len(self.alphabet_text)
         char_range = [chr(x) for x in range(255, 30000)]
         random.shuffle(char_range)
         trans_alph_chars = char_range[:alphabet_length]
+        self.translation_text = ''.join(trans_alph_chars)
 
         self.alphabet = ''.join(alphb64)
         self.transposition_value = random.randrange(133, 1000, 7)
         self.alphabet_translation = base64.b64encode(
-            bytes(''.join(trans_alph_chars), 'utf-8')).decode('utf-8')
+            bytes(self.translation_text, 'utf-8')).decode('utf-8')
 
     def setup_environment(self):
         os.environ['DRS_ALPHABET'] = self.alphabet
@@ -30,9 +31,11 @@ class Config:
         with open('credo.json', 'r') as cred_file:
             credentials = cred_file.read()
 
-        from drisy.core.credentials import transpose
-        transposed_creds = transpose(str(credentials))
-        self.app_credentials = base64.b64encode(transposed_creds).decode('utf-8')
+        translator = credentials.maketrans(self.alphabet_text, self.translation_text)
+        translated_creds = credentials.translate(translator)
+        encoded_creds = base64.b64encode(bytes(translated_creds,'utf-8')).decode('utf-8')
+        
+        self.app_credentials = encoded_creds
 
         env_values = [
             f'export DRS_ALPHABET="{self.alphabet}"',
