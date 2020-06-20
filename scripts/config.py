@@ -13,28 +13,24 @@ class Config:
         alphabet_length = len(self.alphabet_text)
         char_range = [chr(x) for x in range(255, 30000)]
         random.shuffle(char_range)
-        trans_alph_chars = char_range[:alphabet_length]
-        self.translation_text = ''.join(trans_alph_chars)
+        trans_alphabet_chars = char_range[:alphabet_length]
+        self.translation_text = ''.join(trans_alphabet_chars)
 
         self.alphabet = ''.join(alphb64)
         self.transposition_value = random.randrange(133, 1000, 7)
         self.alphabet_translation = base64.b64encode(
             bytes(self.translation_text, 'utf-8')).decode('utf-8')
 
-    def setup_environment(self):
-        os.environ['DRS_ALPHABET'] = self.alphabet
-        os.environ['DRS_TRANS_ALPHABET'] = self.alphabet_translation
-        os.environ['DRS_TRANS_VALUE'] = f'{self.transposition_value}'
-
     def write(self):
-        self.setup_environment()
         with open('credo.json', 'r') as cred_file:
             credentials = cred_file.read()
 
-        translator = credentials.maketrans(self.alphabet_text, self.translation_text)
+        translator = credentials.maketrans(self.alphabet_text,
+                                           self.translation_text)
         translated_creds = credentials.translate(translator)
-        encoded_creds = base64.b64encode(bytes(translated_creds,'utf-8')).decode('utf-8')
-        
+        encoded_creds = base64.b64encode(bytes(translated_creds,
+                                               'utf-8')).decode('utf-8')
+
         self.app_credentials = encoded_creds
 
         env_values = [
