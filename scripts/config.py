@@ -33,6 +33,11 @@ class Config:
 
         self.app_credentials = encoded_creds
 
+        profile_path = os.getenv('HOME') or os.getenv('USERPROFILE')
+        drisy_path = os.path.join(profile_path,'.Drisy')
+        if not os.path.exists(drisy_path):
+            os.makedirs(drisy_path)
+
         env_values = [
             f'export DRS_ALPHABET="{self.alphabet}"',
             f'export DRS_TRANS_ALPHABET="{self.alphabet_translation}"',
