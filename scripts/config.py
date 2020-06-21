@@ -50,3 +50,9 @@ class Config:
 
         with open('.env.config', 'wt') as config_file:
             config_file.write(self.template)
+
+
+if __name__ == "__main__":
+    cfg = Config()
+    cfg.write()
+    
