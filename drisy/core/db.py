@@ -95,15 +95,15 @@ class DrisyDb:
         return OrderedDict(global_map)
 
     def tables_exist(self):
-        query = "SELECT COUNT(*) FROM owner"
-        tables_exist = False
+        query = "SELECT * FROM owners LIMIT 1"
+        status = False
 
         try:
             result = self.execute_query(query)
-            tables_exist = True
+            status = True
         except sqlite3.Error:
             pass
-        return tables_exist
+        return status
 
 
     def get_dict_entries(self):
