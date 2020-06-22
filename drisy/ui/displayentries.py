@@ -32,7 +32,7 @@ def CreateItemList(parentWindow):
         imageMapIndex[key] = count
 
     dman = DriveManager()
-    driveObjects = dman.get_drive_objects()
+    driveObjects = dman.get_objects()
     colNames = ("Filename", "Type", "Owner")
     colSizes = (500, 100, 200)
     itemDisplay = DriveItemListCtrl(parentWindow.panel, imgList, imageMapIndex,

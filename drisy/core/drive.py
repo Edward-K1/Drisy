@@ -40,9 +40,13 @@ class DriveManager:
 
         return results
 
-    def get_drive_objects(self):
+    def get_objects(self):
         """returns db Entries as DriveObjects"""
         db = DrisyDb()
+        if not db.tables_exist():
+            drive_entries = self.list_files()
+            db.save_from_dict(drive_entries)
+
         entries_list = db.get_dict_entries()
         object_list = [DriveObject(entry) for entry in entries_list]
         return object_list

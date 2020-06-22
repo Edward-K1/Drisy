@@ -12,7 +12,7 @@ class DrisyDb:
         self.db_conn = sqlite3.connect(db_path)
 
     def create_table(self, schema):
-        query = f"CREATE TABLE {schema['name']}({self.get_table_definition(schema)})"
+        query = f"CREATE TABLE IF NOT EXISTS {schema['name']}({self.get_table_definition(schema)})"
         self.execute_query(query)
 
     def create_tables(self):
@@ -48,6 +48,7 @@ class DrisyDb:
         return results
 
     def save_from_dict(self, drive_listing):
+        self.create_tables()
         for info in drive_listing:
             mapping = self.map_file_info(info)
             self.save_user(mapping)
@@ -63,7 +64,7 @@ class DrisyDb:
             # metadata of their first file
             self.execute_query(query, params=(email, username))
 
-        except sqlite3.Error as ex:
+        except sqlite3.IntegrityError as ex:
             print(str(ex))
 
     def save_file_info(self, info_map):
@@ -92,6 +93,18 @@ class DrisyDb:
         }
 
         return OrderedDict(global_map)
+
+    def tables_exist(self):
+        query = "SELECT COUNT(*) FROM owner"
+        tables_exist = False
+
+        try:
+            result = self.execute_query(query)
+            tables_exist = True
+        except sqlite3.Error:
+            pass
+        return tables_exist
+
 
     def get_dict_entries(self):
         query = "select f.*, usr.username from files f, owners usr where f.owner=usr.uem"
