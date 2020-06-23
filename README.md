@@ -44,7 +44,7 @@ drive_objects = dm.list_files()
 To see what properties are available, introspect on a DriveObject or check out the schema file :see_no_evil:
 
 ### Known Issues
-[Google Cop](resources/images/google-cop.PNG?raw=true)
+![Google Cop](resources/images/google-cop.PNG?raw=true)
 - Did you see the red circle above? You might need it at some point.
 - If you're having trouble installing WxPython, you must be using linux. I'll leave you with [link 1](https://shanemcd.org/2020/05/03/how-to-install-wxpython-in-a-python-virtual-environment-on-debian-buster/) and [link 2](https://wiki.wxpython.org/How%20to%20install%20wxPython). 
 Unfortunately I might not be of much use beyond that. *Google?*
