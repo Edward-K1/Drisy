@@ -1,7 +1,7 @@
 # Drisy
 A Google Drive Manager
 
-## [ Work In Progress ]
+### [ Work In Progress ]
 
 ![demo image](resources/images/drisy_demo_image.png?raw=true)
 
@@ -13,7 +13,7 @@ Google App
 - Add Google Drive API to the list of APIs used
 - Configure `Oauth Consent` screen (Only the APP Name will do)
 - Select the `Credentials` Tab and click `Create Credentials`
-- >> Oauth client ID >> Desktop app
+- > Oauth client ID >> Desktop app
 - Download the credentials json file
 
 
@@ -32,7 +32,7 @@ Project
 - run project: `python drisy.py`
 
 ### Known Issues
-- If you're having trouble installing WxPython, you must be using linux. I'll leave you with [link 1](https://shanemcd.org/2020/05/03/how-to-install-wxpython-in-a-python-virtual-environment-on-debian-buster/) and [link 2](https://wiki.wxpython.org/How%20to%20install%20wxPython)
-Unfortunately I might not be of much use beyond that. Google?
-- On some OS and Python versions, WxPython doesn't want to be run from a virtual environment. Latest Python Version? Different OS? Virtual Machine?
-- The threading is still horrible. You'll notice it if your Google Drive has many files. Don't you want to play hero?
+- If you're having trouble installing WxPython, you must be using linux. I'll leave you with [link 1](https://shanemcd.org/2020/05/03/how-to-install-wxpython-in-a-python-virtual-environment-on-debian-buster/) and [link 2](https://wiki.wxpython.org/How%20to%20install%20wxPython). 
+Unfortunately I might not be of much use beyond that. *Google?*
+- On some OS and Python versions, WxPython doesn't want to be run from a virtual environment. *Latest Python Version? Different OS? Virtual Machine?*
+- The threading is still horrible. You'll notice it if your Google Drive has many files. *Don't you want to play hero?*
