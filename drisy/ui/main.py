@@ -10,6 +10,7 @@ from .assets.icon import (DrisyIcon, doc, sheet, slide, unknown, image,
 from .systray import DrisyTray
 from .utils import rescale_image
 from .displayentries import CreateItemList
+from .const import view_docs_url, view_sheets_url, view_slides_url
 
 
 class MainFrame(wx.Frame):
@@ -52,21 +53,35 @@ class MainFrame(wx.Frame):
     def CreateTopBar(self):
         self.toolbar = self.CreateToolBar(style=wx.TB_HORZ_TEXT)
         self.toolbar.AddSeparator()
-        docTool = self.toolbar.AddTool(
-            wx.ID_ANY, 'New Document',
-            wx.Bitmap(rescale_image(doc.Image, 32, 32)), "New Google Document")
+        self.docTool = self.CreateToolBarTool('New Document', doc.Image,
+                                              'New Google Document')
         self.toolbar.AddSeparator()
-        sheetTool = self.toolbar.AddTool(
-            wx.ID_ANY, 'New Spreadsheet',
-            wx.Bitmap(rescale_image(sheet.Image, 32, 32)), "New Google Sheet")
+        self.sheetTool = self.CreateToolBarTool('New Spreadsheet', sheet.Image,
+                                                "New Google Sheet")
         self.toolbar.AddSeparator()
-        slideTool = self.toolbar.AddTool(
-            wx.ID_ANY, 'New Presentation',
-            wx.Bitmap(rescale_image(slide.Image, 32, 32)),
-            "New Google Presentation")
+        self.slideTool = self.CreateToolBarTool('New Presentation', slide.Image,
+                                                "New Google Presentation")
         self.toolbar.AddSeparator()
 
+        self.docTool.url = view_docs_url
+        self.sheetTool.url = view_sheets_url
+        self.slideTool.url = view_slides_url
+
+        self.Bind(wx.EVT_TOOL, self.OnToolItemClick, self.docTool)
+        self.Bind(wx.EVT_TOOL, self.OnToolItemClick, self.sheetTool)
+        self.Bind(wx.EVT_TOOL, self.OnToolItemClick, self.slideTool)
+
         self.toolbar.Realize()
+
+    def CreateToolBarTool(self, label, image, tooltip):
+        return self.toolbar.AddTool(wx.ID_ANY, label,
+                                    wx.Bitmap(rescale_image(image, 32, 32)),
+                                    tooltip)
+
+    def OnToolItemClick(self, event):
+        import webbrowser as browser
+        obj = event.GetEventObject().FindById(event.GetId())
+        browser.open(obj.url)
 
     def SetBaseSizer(self):
         self.baseBox = wx.BoxSizer(wx.VERTICAL)
