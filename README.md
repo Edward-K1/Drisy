@@ -7,7 +7,7 @@ A Google Drive Manager
 
 ### Setup
 
-Google App
+**Google App**
 
 - Create a Google [Console](https://console.developers.google.com) Project
 - Add Google Drive API to the list of APIs used
@@ -17,7 +17,7 @@ Google App
 - Download the credentials json file
 
 
-Project
+**Project**
 
 - make sure you have a working Python3 installation on your system
 - `git clone https://github.com/Edward-K1/Drisy.git`
@@ -30,6 +30,18 @@ Project
 - activate the virtual environment: `venv/bin/activate` or `venv\Scripts\activate`
 - install requirements: `pip install -r requirements.txt`
 - run project: `python drisy.py`
+
+### Different UI Framework
+*So, you're the rebel?*
+
+```
+from drisy.core.drive import DriveManager
+
+dm = DriveManager()
+drive_objects = dm.list_files()
+
+```
+To see what properties are available, introspect on a DriveObject or check out the schema file :see_no_evil:
 
 ### Known Issues
 - If you're having trouble installing WxPython, you must be using linux. I'll leave you with [link 1](https://shanemcd.org/2020/05/03/how-to-install-wxpython-in-a-python-virtual-environment-on-debian-buster/) and [link 2](https://wiki.wxpython.org/How%20to%20install%20wxPython). 
