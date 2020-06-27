@@ -3,7 +3,7 @@ A Google Drive Manager
 
 ### [ Work In Progress ]
 
-![demo image](resources/images/drisy_demo_image.png?raw=true)
+![demo image](resources/images/new-demo.png?raw=true)
 
 ### Setup
 
@@ -49,4 +49,8 @@ To see what properties are available, introspect on a DriveObject or check out t
 - If you're having trouble installing WxPython, you must be using linux. I'll leave you with [link 1](https://shanemcd.org/2020/05/03/how-to-install-wxpython-in-a-python-virtual-environment-on-debian-buster/) and [link 2](https://wiki.wxpython.org/How%20to%20install%20wxPython). 
 Unfortunately I might not be of much use beyond that. *Google?*
 - On some OS and Python versions, WxPython doesn't want to be run from a virtual environment. *Latest Python Version? Different OS? Virtual Machine?*
+- The app won't shutdown when you click the "close button" on the form. It will remain in the system tray. You'll have click the "Exit" option on the system tray menu to shut it down (designed that way).
 - The threading is still horrible. You'll notice it if your Google Drive has many files. *Don't you want to play hero?*
+
+## Credits
+Icons: http://www.iconarchive.com/show/flatwoken-icons-by-alecive/
