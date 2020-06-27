@@ -32,13 +32,14 @@ def CreateItemList(parentWindow):
         imageMapIndex[key] = count
 
     dman = DriveManager()
-    driveObjects = dman.get_objects()
+    driveObjects = sorted(dman.get_objects(), key=lambda x: x.filename)
     colNames = ("Filename", "Type", "Owner")
     colSizes = (500, 100, 200)
     itemDisplay = DriveItemListCtrl(parentWindow.panel, imgList, imageMapIndex,
                                     colNames, colSizes)
     itemDisplay.InsertDriveObjects(driveObjects)
     parentWindow.ItemDisplay = itemDisplay
+    parentWindow.DriveObjects = driveObjects
 
     parentWindow.baseBox.Add(parentWindow.ItemDisplay,
                              proportion=5,

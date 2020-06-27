@@ -34,6 +34,7 @@ class MainFrame(wx.Frame):
 
         self.contextMenu = ContextMenu(self)
         self.ItemDisplay.Bind(wx.EVT_RIGHT_DOWN, self.OnShowContextMenu)
+        self.ItemDisplay.Bind(wx.EVT_LIST_ITEM_ACTIVATED, self.OnItemDoubleClick)
         
 
     def CreateMainMenu(self):
@@ -97,6 +98,13 @@ class MainFrame(wx.Frame):
         pos = event.GetPosition()
         self.ItemDisplay.PopupMenu(self.contextMenu, pos) 
         
+    def OnItemDoubleClick(self, event):
+        index = event.GetEventObject().GetFirstSelected()
+        weblink = self.DriveObjects[index].weblink
+
+        import webbrowser as browser
+        browser.open(weblink)
+
 
     def ExitApp(self, event):
         self.tbIcon.RemoveIcon()

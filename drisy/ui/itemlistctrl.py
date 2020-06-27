@@ -3,7 +3,7 @@ import wx
 
 class DriveItemListCtrl(wx.ListCtrl):
     def __init__(self, parent, imageList, imageMapIndex, columns, columnSizes):
-        super().__init__(parent, -1, style=wx.LC_REPORT | wx.LC_SORT_ASCENDING)
+        super().__init__(parent, -1, style=wx.LC_REPORT)
         self.imageList = imageList
         self.SetImageList(self.imageList, wx.IMAGE_LIST_SMALL)
         self.imageIndex = imageMapIndex
