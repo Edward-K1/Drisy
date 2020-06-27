@@ -38,8 +38,9 @@ def CreateItemList(parentWindow):
     itemDisplay = DriveItemListCtrl(parentWindow.panel, imgList, imageMapIndex,
                                     colNames, colSizes)
     itemDisplay.InsertDriveObjects(driveObjects)
+    parentWindow.ItemDisplay = itemDisplay
 
-    parentWindow.baseBox.Add(itemDisplay,
+    parentWindow.baseBox.Add(parentWindow.ItemDisplay,
                              proportion=5,
                              flag=wx.ALL | wx.EXPAND,
                              border=15)

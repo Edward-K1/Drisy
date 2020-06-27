@@ -11,6 +11,7 @@ from .systray import DrisyTray
 from .utils import rescale_image
 from .displayentries import CreateItemList
 from .const import view_docs_url, view_sheets_url, view_slides_url
+from .contextmenu import ContextMenu
 
 
 class MainFrame(wx.Frame):
@@ -30,6 +31,10 @@ class MainFrame(wx.Frame):
             executor.map(CreateItemList(self))  # not proper usage of threading
 
         self.Size = (800, 600)
+
+        self.contextMenu = ContextMenu(self)
+        self.ItemDisplay.Bind(wx.EVT_RIGHT_DOWN, self.OnShowContextMenu)
+        
 
     def CreateMainMenu(self):
         self.menu = wx.MenuBar()
@@ -53,14 +58,14 @@ class MainFrame(wx.Frame):
     def CreateTopBar(self):
         self.toolbar = self.CreateToolBar(style=wx.TB_HORZ_TEXT)
         self.toolbar.AddSeparator()
-        self.docTool = self.CreateToolBarTool('New Document', doc.Image,
-                                              'New Google Document')
+        self.docTool = self.CreateToolBarTool('Documents', doc.Image,
+                                              'Create / View Documents')
         self.toolbar.AddSeparator()
-        self.sheetTool = self.CreateToolBarTool('New Spreadsheet', sheet.Image,
-                                                "New Google Sheet")
+        self.sheetTool = self.CreateToolBarTool('Spreadsheets', sheet.Image,
+                                                "Create / View Spreadsheets")
         self.toolbar.AddSeparator()
-        self.slideTool = self.CreateToolBarTool('New Presentation', slide.Image,
-                                                "New Google Presentation")
+        self.slideTool = self.CreateToolBarTool('Presentations', slide.Image,
+                                                "Create / View Presentations")
         self.toolbar.AddSeparator()
 
         self.docTool.url = view_docs_url
@@ -87,10 +92,16 @@ class MainFrame(wx.Frame):
         self.baseBox = wx.BoxSizer(wx.VERTICAL)
         self.panel.SetSizer(self.baseBox)
 
+
+    def OnShowContextMenu(self, event):
+        pos = event.GetPosition()
+        self.ItemDisplay.PopupMenu(self.contextMenu, pos) 
+        
+
     def ExitApp(self, event):
         self.tbIcon.RemoveIcon()
         self.tbIcon.Destroy()
-        sys.exit()
+        self.Close()
 
 
 class DrisyApp(wx.App):
