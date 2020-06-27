@@ -53,4 +53,4 @@ Unfortunately I might not be of much use beyond that. *Google?*
 - The threading is still horrible. You'll notice it if your Google Drive has many files. *Don't you want to play hero?*
 
 ## Credits
-Icons: http://www.iconarchive.com/show/flatwoken-icons-by-alecive/
+Icons: https://www.iconarchive.com/show/flatwoken-icons-by-alecive.html
