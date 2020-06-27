@@ -5,7 +5,7 @@ from inspect import getsourcefile
 from .assets.icon import (doc, sheet, slide, unknown, image, archive, folder,
                           audio, video, pdf, executable, code)
 from .utils import rescale_image
-from .ItemListCtrl import DriveItemListCtrl
+from .itemlistctrl import DriveItemListCtrl
 from drisy.core.drive import DriveManager
 
 
