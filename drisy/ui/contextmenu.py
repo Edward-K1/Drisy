@@ -23,3 +23,11 @@ class ContextMenu(wx.Menu):
         self.Append(wx.ID_ANY, "Tags", tagMenu)
         self.AppendSeparator()
         self.Append(wx.ID_ANY, "Filter By", filterMenu)
+        self.Bind(wx.EVT_MENU, self.OnOpen, openMItem)
+
+    def OnOpen(self, event):
+        index = self.parent.ItemDisplay.GetFirstSelected()
+        weblink = self.parent.DriveObjects[index].weblink
+
+        import webbrowser as browser
+        browser.open(weblink)
